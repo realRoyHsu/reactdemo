@@ -1,0 +1,24 @@
+.Jsplumb {
+  display: flex;
+  height: 100vh;
+  justify-content: space-between;
+  .LeftSide {
+    width: 280px;
+    border: 1px solid red;
+    .drag-move {
+      cursor: move;
+    }
+    .site-tree-search-value {
+      color: #f50;
+    }
+  }
+  .Content {
+    flex: 1;
+    border: 1px solid red;
+
+  }
+  .RightSide {
+    width: 400px;
+    border: 1px solid red;
+  }
+}

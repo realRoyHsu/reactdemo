@@ -1,0 +1,126 @@
+#Flow {
+  height: 100%;
+  width: 100%;
+  // padding: 10px;
+  background-color: burlywood;
+  position: relative;
+  overflow: auto;
+  /*新建人工节点内容区样式*/
+  .viso-name-active {
+    background-color: #e4f1ff !important;
+    border: 1px solid #1b85ff;
+  }
+  .viso-name {
+    box-sizing: border-box;
+    height: 55px;
+    width: 211px;
+    position: absolute;
+    z-index: 4;
+    background-color: white;
+    border-radius: 4px;
+    text-align: left;
+    font-size: 13px;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.08);
+
+    .viso-name-body {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      padding: 10px;
+      box-sizing: border-box;
+      .viso-name-icon {
+        float: left;
+        width: 15px;
+        font-size: 14px;
+      }
+      & .viso-name-content {
+        font-size: 13px;
+        margin-left: 25px;
+
+        & .align-item-name {
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          line-height: 14px;
+          pointer-events: none;
+        }
+
+        & .align-item-status {
+          position: absolute;
+          right: 5px;
+          top: 5px;
+
+          &-1,
+          &-2 {
+            color: #8f96b3;
+          }
+          &-3 {
+            color: #f8ac30;
+          }
+          &-4 {
+            color: #00bd49;
+          }
+          &-5 {
+            color: #f22635;
+          }
+        }
+      }
+
+      & .viso-other {
+        display: flex;
+        justify-content: space-between;
+        & > div {
+          display: block;
+        }
+      }
+
+      & .align-item-connector {
+        position: absolute;
+        top: 100%;
+        width: 10px;
+        height: 10px;
+        left: 50%;
+        border-radius: 50%;
+        border: 1px solid #1b85ff;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+
+        &:hover {
+          background-color: #1b85ff;
+        }
+      }
+
+      & .align-item-delete {
+        position: absolute;
+        top: -14px;
+        width: 28px;
+        height: 28px;
+        right: -36px;
+        border-radius: 50%;
+        background-color: #ffdada;
+        box-shadow: 0 3px 2px 0 rgba(242, 38, 53, 0.08);
+        line-height: 29px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        color: #f22635;
+      }
+    }
+  }
+  .delete-connection {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #ffdada;
+    box-shadow: 0 3px 2px 0 rgba(242, 38, 53, 0.08);
+    line-height: 29px;
+    text-align: center;
+    font-size: 16px;
+    // font-weight: 600;
+    color: #f22635;
+    z-index: 999;
+  }
+}
+.drapover-inner {
+  border: 2px dashed blue;
+}
