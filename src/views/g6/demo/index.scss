@@ -2,6 +2,7 @@
   display: flex;
   height: 100vh;
   justify-content: space-between;
+  user-select: none;
   .LeftSide {
     width: 280px;
     border: 1px solid red;
@@ -16,6 +17,7 @@
     flex: 1;
     border: 1px solid red;
     position: relative;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAAGz7rX1AAAABGdBTUEAALGPC/xhBQAAAEVJREFUSA1jYBjs4NadB/8H1I0gBwy4I2gWAvh8xkQzW0cNHtgQGN5pemDDdtT20RBADgF8JSyyOmT2aMmLHBqjbOqGAAAbVhkYx/42BQAAAABJRU5ErkJggg==) repeat;
 
     /* 提示框的样式 */
     .g6-tooltip {

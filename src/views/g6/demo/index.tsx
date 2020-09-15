@@ -1,5 +1,5 @@
 import React from "react";
-import LeftSide from "./leftSide";
+import LeftSide from "./leftSide/index1";
 import Content from "./content/index";
 import "./index.scss";
 

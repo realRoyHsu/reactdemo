@@ -3,8 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "homepage": ".",
+  "scripts": {
+    "start": "set PORT=3000 HOST=mysit.cnsuning.com && react-app-rewired start --max-old-space-size=4096",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
+  },
   "dependencies": {
-    "@antv/g6": "^3.5.10",
+    "@antv/g6": "^3.6.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -46,10 +53,13 @@
     "uuid": "^8.2.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.10.5",
     "@types/react-avatar-editor": "^10.3.5",
     "@types/uuid": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
+    "babel-plugin-import": "^1.13.0",
+    "customize-cra": "^1.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-babel": "^5.3.0",
@@ -58,14 +68,8 @@
     "http-proxy-middleware": "^1.0.4",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
+    "react-app-rewired": "^2.1.6",
     "typescript": "~3.7.2"
-  },
-  "scripts": {
-    "start": "set PORT=3000 HOST=mysit.cnsuning.com && react-scripts start --max-old-space-size=4096",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
