@@ -1,12 +1,19 @@
-import React, { useRef, useEffect, useState } from "react";
 import G6 from "@antv/g6";
 import { GraphOptions, BehaviorOption } from "@antv/g6/lib/types";
+import Utils from "./utils/index";
 import defaultComponent from "./components/index";
 import defaultBehavior from "./behavior/index";
 
 const _initComponent = Symbol("_initComponent");
 const _initBehavior = Symbol("_initBehavior");
 
+function addUtilMethods(list: any) {
+  return function (target: any): void {
+    Object.assign(target.prototype, list);
+  };
+}
+
+@addUtilMethods(Utils)
 class Graph extends G6.Graph {
   constructor(options: GraphOptions) {
     super(options);
@@ -60,9 +67,10 @@ class Graph extends G6.Graph {
    * @param name behaviors 名称
    * @param behavior BehaviorOption
    */
-  registerBehaviors = (name: string, behavior: BehaviorOption): any => {
-    G6.registerBehavior(name, behavior);
-  };
+  // registerBehaviors = (name: string, behavior: BehaviorOption): any => {
+  //   G6.registerBehavior(name, behavior);
+  // };
 }
-
+// 初始化行为
+Graph[_initBehavior]();
 export default Graph;

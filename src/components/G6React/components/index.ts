@@ -1,4 +1,4 @@
-import edges from "./edge";
-import combos from "./combo";
-import nodes from "./node";
+import edges from "./edges";
+import combos from "./combos";
+import nodes from "./nodes";
 export default [edges, combos, nodes];

@@ -16,26 +16,32 @@ const nodeMove = {
   onNodeMouseEnter(e: any): any {
     console.log(e, e.item.get("canvas"), "onNodeMouseEnter");
     e.preventDefault();
+    e.stopPropagation();
   },
   onNodeMouseLeave(e: any): any {
     console.log("onNodeMouseLeave");
     e.preventDefault();
+    e.stopPropagation();
   },
   onNodeDragStart(e: any): any {
     console.log(e, "onNodeDragStart");
     e.preventDefault();
+    e.stopPropagation();
   },
   onNodeDrag(e: any): any {
     console.log("onNodeDrag");
     e.preventDefault();
+    e.stopPropagation();
   },
   onNodeDragend(e: any): any {
     console.log("onNodeDrag");
     e.preventDefault();
+    e.stopPropagation();
   },
   onCanvasMouseLeave(e: any): any {
     console.log("onNodeDrag");
     e.preventDefault();
+    e.stopPropagation();
   },
   // 自定义方法
   onNodeClick(e: any): any {
@@ -54,11 +60,13 @@ const nodeMove = {
     // e.currentTarget.updateItem(item, model);
     console.log(e, "nodeclick");
     e.preventDefault();
+    e.stopPropagation();
   },
   // 自定义方法
   onMouseMove(e: any): any {
     // TODO
     e.preventDefault();
+    e.stopPropagation();
   },
   // 会与用户传入的参数进行合并
   getDefaultCfg(): any {
@@ -87,6 +95,6 @@ const nodeMove = {
 };
 
 export default {
-  name: "nodeMove",
+  name: "move-node",
   options: nodeMove,
 };
