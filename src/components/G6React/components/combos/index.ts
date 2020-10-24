@@ -90,19 +90,19 @@ const options = {
       name: "0-contanier",
     });
 
-    group.addShape("circle", {
-      attrs: {
-        x: 150,
-        y: 95,
-        r: 6,
-        stroke: "red",
-        fill: "#fff",
-        lineWidth: 6,
-        zIndex: 999,
-      },
-      draggable: false,
-      name: "0-contanier",
-    });
+    // group.addShape("circle", {
+    //   attrs: {
+    //     x: 150,
+    //     y: 95,
+    //     r: 6,
+    //     stroke: "red",
+    //     fill: "#fff",
+    //     lineWidth: 6,
+    //     zIndex: 999,
+    //   },
+    //   draggable: false,
+    //   name: "0-contanier",
+    // });
 
     return keyShape;
   },
@@ -127,21 +127,27 @@ const options = {
    * @param item 实例
    */
   update(cfg: any, item: any): any {
+    const getItemBBox = item.getBBox();
     const group = item.getContainer();
     const rect = group.find((ele: any) => ele.get("name") === "combo-keyShape");
     const rectHeader = group.find(
       (ele: any) => ele.get("name") === "combo-header-keyShape"
     );
+    const groupBox = group.getBBox();
     const getBBox = rect.getBBox();
     const rectHeaderBox = rectHeader.getBBox();
-    console.log(cfg, getBBox, rectHeaderBox);
+    console.log(cfg, groupBox, getItemBBox, getBBox, rectHeaderBox);
     rect.attr({
-      width: getBBox.width,
-      height: getBBox.height,
+      x: getBBox.x,
+      y: getBBox.y,
+      width: Math.ceil(getBBox.maxX) - Math.floor(getBBox.minX),
+      height: Math.ceil(getBBox.maxY) - Math.floor(getBBox.minX),
     });
     rectHeader.attr({
+      x: rectHeaderBox.x,
+      y: rectHeaderBox.y,
       width: rectHeaderBox.width,
-      height: rectHeaderBox.height,
+      height: 30,
     });
   },
   /**
