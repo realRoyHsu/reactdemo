@@ -68,7 +68,23 @@ const App: React.FC<Props> = () => {
         // fitView: true,
         // fitViewPadding: [20, 40, 50, 20],
         modes: {
-          default: ["drag-canvas", "drag-node", "zoom-canvas"],
+          default: [
+            "drag-canvas",
+            "drag-combo",
+            // "drag-node",
+            "move-node",
+            // {
+            //   type: "drag-node",
+            //   // enableDelegate: true,
+            //   // shouldBegin: (e) => {
+            //   //   // 不允许拖拽 id 为 'node1' 的节点
+            //   //   if (e.item && e.item.getModel().id === "node1") return false;
+            //   //   return true;
+            //   // },
+            // },
+            // "drag-node-with-group",
+            "zoom-canvas",
+          ],
         },
         minZoom: 0.2,
         maxZoom: 10,

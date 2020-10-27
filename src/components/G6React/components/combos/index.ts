@@ -76,24 +76,10 @@ const options = {
     // });
 
     // 原点 0 0
-    group.addShape("circle", {
-      attrs: {
-        x: 0,
-        y: 0,
-        r: 6,
-        stroke: "red",
-        fill: "#fff",
-        lineWidth: 6,
-        zIndex: 999,
-      },
-      draggable: false,
-      name: "0-contanier",
-    });
-
     // group.addShape("circle", {
     //   attrs: {
-    //     x: 150,
-    //     y: 95,
+    //     x: 0,
+    //     y: 0,
     //     r: 6,
     //     stroke: "red",
     //     fill: "#fff",
@@ -103,7 +89,6 @@ const options = {
     //   draggable: false,
     //   name: "0-contanier",
     // });
-
     return keyShape;
   },
   /**
@@ -127,6 +112,7 @@ const options = {
    * @param item 实例
    */
   update(cfg: any, item: any): any {
+    const model = item.getModel();
     const getItemBBox = item.getBBox();
     const group = item.getContainer();
     const rect = group.find((ele: any) => ele.get("name") === "combo-keyShape");
@@ -136,19 +122,19 @@ const options = {
     const groupBox = group.getBBox();
     const getBBox = rect.getBBox();
     const rectHeaderBox = rectHeader.getBBox();
-    console.log(cfg, groupBox, getItemBBox, getBBox, rectHeaderBox);
-    rect.attr({
-      x: getBBox.x,
-      y: getBBox.y,
-      width: Math.ceil(getBBox.maxX) - Math.floor(getBBox.minX),
-      height: Math.ceil(getBBox.maxY) - Math.floor(getBBox.minX),
-    });
-    rectHeader.attr({
-      x: rectHeaderBox.x,
-      y: rectHeaderBox.y,
-      width: rectHeaderBox.width,
-      height: 30,
-    });
+    console.log(cfg, groupBox, getItemBBox, getBBox, rectHeaderBox, model.data);
+    // rect.attr({
+    //   x: getBBox.x,
+    //   y: getBBox.y,
+    //   width: Math.ceil(getBBox.maxX) - Math.floor(getBBox.minX),
+    //   height: Math.ceil(getBBox.maxY) - Math.floor(getBBox.minY),
+    // });
+    // rectHeader.attr({
+    //   x: rectHeaderBox.x,
+    //   y: rectHeaderBox.y,
+    //   width: rectHeaderBox.width,
+    //   height: 30,
+    // });
   },
   /**
    * 更新节点后的操作，新增的图形需要在这里控制其更新逻辑

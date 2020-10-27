@@ -1,45 +1,54 @@
-const nodeMove = {
+import { INode } from "@antv/g6/lib/interface/item";
+import { BehaviorOption, G6Event } from "@antv/g6/lib/types";
+
+const modeNode: BehaviorOption = {
   // 定义事件及处理事件的方法
-  getEvents(): any {
+  getEvents(): { [key in G6Event]?: string } {
     console.log("getEvents");
     return {
-      "node:mouseenter": "onNodeMouseEnter",
-      "node:mouseleave": "onNodeMouseLeave",
-      "node:dragstart": "onNodeDragStart",
-      "node:drag": "onNodeDrag",
-      "node:dragend": "onNodeDragend",
-      "canvas:mouseleave": "onCanvasMouseLeave",
+      "node:mouseenter": "onMouseEnter",
+      "node:mouseleave": "onMouseLeave",
+      "node:dragstart": "onDragStart",
+      "node:drag": "onDrag",
+      "node:dragend": "onDragend",
       "node:click": "onNodeClick",
       mousemove: "onMouseMove",
     };
   },
-  onNodeMouseEnter(e: any): any {
-    console.log(e, e.item.get("canvas"), "onNodeMouseEnter");
+  onMouseEnter(e: any): any {
+    console.log(e, e.item.get("canvas"), "onMouseEnter");
     e.preventDefault();
     e.stopPropagation();
   },
-  onNodeMouseLeave(e: any): any {
-    console.log("onNodeMouseLeave");
+  onMouseLeave(e: any): any {
+    console.log("onMouseLeave");
     e.preventDefault();
     e.stopPropagation();
   },
-  onNodeDragStart(e: any): any {
-    console.log(e, "onNodeDragStart");
+  onDragStart(e: any): any {
+    console.log(e, "onDragStart");
+
+    const item: INode = e.item as INode;
+
+    // 拖动时，设置拖动元素的 capture 为false，则不拾取拖动的元素
+    const group = item.getContainer();
+    group.set("capture", false);
+
     e.preventDefault();
     e.stopPropagation();
   },
-  onNodeDrag(e: any): any {
-    console.log("onNodeDrag");
+  onDrag(e: any): any {
+    console.log("onDrag");
     e.preventDefault();
     e.stopPropagation();
   },
-  onNodeDragend(e: any): any {
-    console.log("onNodeDrag");
+  onDragend(e: any): any {
+    console.log("onDrag");
     e.preventDefault();
     e.stopPropagation();
   },
   onCanvasMouseLeave(e: any): any {
-    console.log("onNodeDrag");
+    console.log("onDrag");
     e.preventDefault();
     e.stopPropagation();
   },
@@ -94,7 +103,4 @@ const nodeMove = {
   },
 };
 
-export default {
-  name: "move-node",
-  options: nodeMove,
-};
+export default modeNode;

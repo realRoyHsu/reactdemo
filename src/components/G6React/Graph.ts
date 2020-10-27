@@ -2,10 +2,9 @@ import G6 from "@antv/g6";
 import { GraphOptions, BehaviorOption } from "@antv/g6/lib/types";
 import Utils from "./utils/index";
 import defaultComponent from "./components/index";
-import defaultBehavior from "./behavior/index";
+import "./behavior/index";
 
 const _initComponent = Symbol("_initComponent");
-const _initBehavior = Symbol("_initBehavior");
 
 function addUtilMethods(list: any) {
   return function (target: any): void {
@@ -24,15 +23,6 @@ class Graph extends G6.Graph {
   [_initComponent] = (): void => {
     defaultComponent.forEach((item: any) => {
       this.registerComponent(item.type, item, item.extendShapeType);
-    });
-  };
-
-  // 初始化行为
-  static [_initBehavior] = (): void => {
-    defaultBehavior.forEach((item) => {
-      G6.registerBehavior(item.name, item.options);
-      // super.removeBehaviors(item.name, "default");
-      // super.addBehaviors(item.name, "default");
     });
   };
 
@@ -67,10 +57,9 @@ class Graph extends G6.Graph {
    * @param name behaviors 名称
    * @param behavior BehaviorOption
    */
-  // registerBehaviors = (name: string, behavior: BehaviorOption): any => {
-  //   G6.registerBehavior(name, behavior);
-  // };
+  registerBehavior = (name: string, behavior: BehaviorOption): any => {
+    G6.registerBehavior(name, behavior);
+  };
 }
-// 初始化行为
-Graph[_initBehavior]();
+
 export default Graph;

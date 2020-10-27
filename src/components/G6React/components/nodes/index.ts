@@ -62,7 +62,7 @@ const options = {
         y: 0,
         width: config.outerWidth,
         height: config.outerHeight,
-        stroke: config.borderColor,
+        // stroke: config.borderColor,
         fill: config.backgoundColor,
       },
       draggable: true,
@@ -162,19 +162,19 @@ const options = {
       });
     }
     // 原点 0 0
-    group.addShape("circle", {
-      attrs: {
-        x: 0,
-        y: 0,
-        r: 6,
-        stroke: "red",
-        fill: "#fff",
-        lineWidth: 6,
-        zIndex: 999,
-      },
-      draggable: false,
-      name: "0-contanier",
-    });
+    // group.addShape("circle", {
+    //   attrs: {
+    //     x: 0,
+    //     y: 0,
+    //     r: 6,
+    //     stroke: "red",
+    //     fill: "#fff",
+    //     lineWidth: 6,
+    //     zIndex: 999,
+    //   },
+    //   draggable: false,
+    //   name: "0-contanier",
+    // });
 
     return keyShape;
   },
