@@ -146,6 +146,7 @@ const options = {
           lineWidth: config.lineWidth,
         },
         name: "left-circle-shape",
+        isAnchorPoint: true,
       });
     }
     if (showRightEndPoint) {
@@ -159,6 +160,7 @@ const options = {
           lineWidth: config.lineWidth,
         },
         name: "right-circle-shape",
+        isAnchorPoint: true,
       });
     }
     // 原点 0 0
