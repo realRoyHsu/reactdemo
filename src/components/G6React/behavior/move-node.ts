@@ -2,6 +2,12 @@ import { INode } from "@antv/g6/lib/interface/item";
 import { BehaviorOption, G6Event } from "@antv/g6/lib/types";
 
 const modeNode: BehaviorOption = {
+  getDefaultCfg(): Record<string, any> {
+    return {
+      updateEdge: false,
+      trigger: "click", // mouseneter or click
+    };
+  },
   // 定义事件及处理事件的方法
   getEvents(): { [key in G6Event]?: string } {
     console.log("getEvents");
@@ -25,17 +31,27 @@ const modeNode: BehaviorOption = {
     e.preventDefault();
     e.stopPropagation();
   },
-  onDragStart(e: any): any {
-    console.log(e, "onDragStart");
+  onDragStart(evt: any): any {
+    console.log(evt, "onDragStart");
 
-    const item: INode = e.item as INode;
+    const item: INode = evt.item as INode;
 
     // 拖动时，设置拖动元素的 capture 为false，则不拾取拖动的元素
     const group = item.getContainer();
     group.set("capture", false);
 
-    e.preventDefault();
-    e.stopPropagation();
+    // 如果拖动的target 是linkPoints / anchorPoints 则不允许拖动
+    const { target } = evt;
+    if (target) {
+      const isAnchorPoint = target.get("isAnchorPoint");
+      console.log(target, isAnchorPoint);
+      if (isAnchorPoint) {
+        return;
+      }
+    }
+
+    // evt.preventDefault();
+    // evt.stopPropagation();
   },
   onDrag(e: any): any {
     console.log("onDrag");
@@ -78,11 +94,6 @@ const modeNode: BehaviorOption = {
     e.stopPropagation();
   },
   // 会与用户传入的参数进行合并
-  getDefaultCfg(): any {
-    return {
-      trigger: "click", // mouseneter or click
-    };
-  },
   // 是否阻止行为发生
   shouldBegin(): boolean {
     // 这里可以根据业务自定义
