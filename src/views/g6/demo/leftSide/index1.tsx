@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu, Input } from "antd";
 // import { ClickParam } from "antd/lib/menu";
-import servicePath from "./serviceSvgPath";
+import servicePath from "../model/serviceSvgPath";
 
 const { SubMenu } = Menu;
 const { Search } = Input;

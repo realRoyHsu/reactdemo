@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { GraphReact } from "@/components/G6React/index";
 import { GraphData, NodeConfig } from "@antv/g6/lib/types";
+import { GraphReact } from "@/components/G6React/index.ts";
+import initWrapperData from "./../utils/initData";
 // 事件
 import { nodeAddListener } from "../events";
+import { original } from "./data.js";
 
 const data: GraphData = {
   nodes: [
@@ -52,9 +54,6 @@ const App: React.FC<Props> = () => {
       (containerRef.current && containerRef.current.scrollWidth) || 500;
     const height =
       (containerRef.current && containerRef.current.scrollHeight) || 500;
-    // const width: number =
-    //   document.getElementById("container")?.scrollWidth || 500;
-    // const height = document.getElementById("container")?.scrollHeight || 500;
     if (!graphRef.current) {
       graphRef.current = new GraphReact({
         container: containerRef.current,
@@ -71,8 +70,8 @@ const App: React.FC<Props> = () => {
           default: [
             "drag-canvas",
             "drag-combo",
-            // "drag-node",
-            "move-node",
+            "drag-node",
+            // "move-node",
             // {
             //   type: "drag-node",
             //   // enableDelegate: true,
@@ -89,7 +88,9 @@ const App: React.FC<Props> = () => {
         minZoom: 0.2,
         maxZoom: 10,
       });
-      graphRef.current.data(data); // 加载远程数据
+      let wrapperData = initWrapperData(original, graphRef.current);
+      console.log(wrapperData, "ww");
+      graphRef.current.data(wrapperData); // 加载远程数据
       graphRef.current.render(); // 渲染
       // graphRef.current.paint(); // 重绘
       // nodeAddListener(graphRef.current);
@@ -131,7 +132,7 @@ const App: React.FC<Props> = () => {
       // onDragEnter={onDragEnter}
       onDrop={onDrop}
       // onDragLeave={onDragLeave}
-    ></div>
+    />
   );
 };
 export default App;

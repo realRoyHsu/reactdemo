@@ -3,6 +3,7 @@ import { GraphOptions, BehaviorOption } from "@antv/g6/lib/types";
 import Utils from "./utils/index";
 import defaultComponent from "./components/index";
 import "./behavior/index";
+import PluginBase from "@antv/g6/lib/plugins/base";
 
 const _initComponent = Symbol("_initComponent");
 
@@ -60,6 +61,14 @@ class Graph extends G6.Graph {
   registerBehavior = (name: string, behavior: BehaviorOption): any => {
     G6.registerBehavior(name, behavior);
   };
+
+  /*
+   * 注册插件系统
+   * @overrides
+   * */
+  addPlugin(plugin: PluginBase) {
+    super.addPlugin(plugin);
+  }
 }
 
 export default Graph;

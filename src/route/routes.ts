@@ -9,6 +9,7 @@ const DraggableJsplumb = lazy(() => import("../views/draggable/jsplumb"));
 const G6 = lazy(() => import("../views/g6/index"));
 const G6Demo = lazy(() => import("../views/g6/demo/index"));
 const GraphCustom = lazy(() => import("../views/g6/GraphCustom/index"));
+const VirtualListDemo = lazy(() => import("../views/VirtualListDemo/index"));
 
 export const routes: RouteConfig[] = [
   {
@@ -52,5 +53,9 @@ export const routes: RouteConfig[] = [
         meta: { title: "GraphCustom", icon: "", affix: true },
       },
     ],
+  },
+  {
+    path: "/virtualList",
+    component: VirtualListDemo,
   },
 ];
