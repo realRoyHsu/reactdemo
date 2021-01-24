@@ -44,21 +44,6 @@ const options = {
     });
     console.log(Math.max(cfg?.style?.width || 0, defaultWidth));
 
-    // header
-    group.addShape("rect", {
-      attrs: {
-        x: -defaultWidth + width / 2 + padding,
-        y: -defaultHeight + height / 2 + padding,
-        width: defaultWidth,
-        height: 30,
-        fill: "#FFF",
-        stroke: config.borderColor,
-        lineWidth: config.lineWidth,
-        radius: styleConfig.radius,
-      },
-      draggable: true,
-      name: "combo-header-keyShape",
-    });
     return keyShape;
   },
   /**
@@ -68,12 +53,8 @@ const options = {
    */
   afterDraw: (cfg: any, group: any): any => {
     const rect = group.find((ele: any) => ele.get("name") === "combo-keyShape");
-    const rectHeader = group.find(
-      (ele: any) => ele.get("name") === "combo-header-keyShape"
-    );
-    const rectHeaderBox = rectHeader.getBBox();
     const getBBox = rect.getBBox();
-    console.log(cfg, group, getBBox, rectHeaderBox);
+    console.log(cfg, group, getBBox);
   },
 
   /**
@@ -86,25 +67,10 @@ const options = {
     const getItemBBox = item.getBBox();
     const group = item.getContainer();
     const rect = group.find((ele: any) => ele.get("name") === "combo-keyShape");
-    const rectHeader = group.find(
-      (ele: any) => ele.get("name") === "combo-header-keyShape"
-    );
     const groupBox = group.getBBox();
     const getBBox = rect.getBBox();
-    const rectHeaderBox = rectHeader.getBBox();
-    console.log(cfg, groupBox, getItemBBox, getBBox, rectHeaderBox, model.data);
+    console.log(cfg, groupBox, getItemBBox, getBBox, model.data);
     // rect.attr({
-    //   x: getBBox.x,
-    //   y: getBBox.y,
-    //   width: Math.ceil(getBBox.maxX) - Math.floor(getBBox.minX),
-    //   height: Math.ceil(getBBox.maxY) - Math.floor(getBBox.minY),
-    // });
-    // rectHeader.attr({
-    //   x: rectHeaderBox.x,
-    //   y: rectHeaderBox.y,
-    //   width: rectHeaderBox.width,
-    //   height: 30,
-    // });
   },
   /**
    * 更新节点后的操作，新增的图形需要在这里控制其更新逻辑

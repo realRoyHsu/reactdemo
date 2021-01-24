@@ -164,9 +164,9 @@ function initWrapperData(
   if (isErrData || (graphInfo && graphInfo.graphInfo) || !graphInfo) {
     const groups: {
       collapsed: boolean;
-      shape: string;
+      type: string;
       id: any;
-      parent?: any;
+      parentId?: any;
       showLocation?: any;
       uuid: any;
       childId: any;
@@ -179,9 +179,9 @@ function initWrapperData(
       service: any;
       label?: string;
       id: any;
-      shape: string;
+      type: string;
       img: any;
-      parent: any;
+      comboId: any;
       showLeft: boolean;
       showRight: boolean;
       uuid: any;
@@ -234,9 +234,9 @@ function initWrapperData(
           if (isGroup) {
             appGroup = {
               collapsed: false,
-              shape: "app",
+              type: "app",
               id: editor.guid(),
-              parent: component.groupId,
+              parentId: component.groupId,
               showLocation: service.showLocation,
               uuid: component.uuid,
               childId: component.nodeId,
@@ -245,7 +245,7 @@ function initWrapperData(
             groups.push(appGroup);
             if (isRegion) {
               const regionGroup = {
-                shape: "region",
+                type: "region",
                 collapsed: false,
                 id: component.groupId,
                 uuid: component.uuid,
@@ -266,9 +266,9 @@ function initWrapperData(
             service,
             label,
             id: component.uuid || component.nodeId,
-            shape: "service",
+            type: "service",
             img: imagPath,
-            parent: appGroup ? appGroup.id : "",
+            comboId: appGroup ? appGroup.id : "",
             showLeft: false,
             showRight: false,
             uuid: component.uuid,
@@ -329,9 +329,9 @@ function initWrapperData(
             showAnchor: false,
             service,
             id: strategyNode.uuid || strategyNode.nodeId || editor.guid(),
-            shape: "service",
+            type: "service",
             img: "",
-            parent: appGroup.id,
+            comboId: appGroup.id,
             showLeft: false,
             showRight: false,
             uuid: strategyNode.uuid,
@@ -382,7 +382,7 @@ function initWrapperData(
       }
     });
     const regionUuids = groups
-      .filter((group) => group.shape === "region")
+      .filter((group) => group.type === "region")
       .map((region) => ({
         uuid: region.uuid,
         id: region.id,
@@ -394,42 +394,11 @@ function initWrapperData(
       regionUuidMap[uuid] = [];
     });
     wrapperData = {
-      groups,
+      combos: groups,
       nodes,
       edges,
     };
   }
-  // else {
-  //   const _graphComponents = graphComponents.map(c => ({ ...c }));
-  //   const strategyNodes = _graphComponents.filter(component =>
-  //     ['LOGBACK', 'PUBLICNETAGENT', 'SPM', 'LOGCOLLECT'].includes(component.type));
-  //   strategyNodes.forEach(n => {
-  //     try {
-  //       const { uuid, data } = n;
-  //       if (!data.rely) {
-  //         const linkObj = graphLinks.find(l => l.to === uuid);
-  //         if (linkObj) {
-  //           const index = _graphComponents.findIndex(c => c.uuid === linkObj.from);
-  //           const c = { ..._graphComponents[index] };
-  //           const relyData = JSON.parse(c.data);
-  //           if (!relyData.rely) {
-  //             relyData.rely = [];
-  //           }
-  //           if (!relyData.rely.some(r => r.uuid === n.uuid)) {
-  //             relyData.rely.push(n);
-  //             _graphComponents[index].data = JSON.stringify(relyData);
-  //           }
-  //         }
-  //       }
-  //     } catch (e) {
-  //     }
-  //   })
-  //   wrapperData = editor.wrapData(_graphComponents, graphLinks);
-  //   wrapperData.nodes = wrapperData.nodes.map(node => ({
-  //     ...node,
-  //     service: { formData: { ...node } },
-  //   }));
-  // }
   return wrapperData;
 }
 

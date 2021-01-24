@@ -5,21 +5,16 @@ import { styleConfig, imgStyleConfig } from "./../configs/index";
 let graph: any;
 const ERROR_COLOR = "#F5222D";
 const getNodeConfig = (cfg: any): any => {
-  const innerWidth = 80;
-  let innerHeight = 30;
-  const outerWidth = 100;
+  const outerWidth = 90;
   let outerHeight = 50;
   let imgWidth = 0;
   let imgHeight = 0;
   if (cfg.img) {
     imgWidth = imgHeight = 40;
-    innerHeight = 80;
     outerHeight = 90;
   }
   const config = {
     ...styleConfig,
-    innerHeight,
-    innerWidth,
     outerWidth,
     outerHeight,
     imgWidth,
@@ -53,7 +48,14 @@ const EXPAND_ICON = function EXPAND_ICON(x: any, y: any, r: any): any {
 const options = {
   draw: (cfg: any, group: any): any => {
     console.log(cfg, group);
-    const { showLeftEndPoint, showRightEndPoint, showDocker, img, label } = cfg;
+    const {
+      showAnchor,
+      showLeftEndPoint,
+      showRightEndPoint,
+      showDocker,
+      img,
+      label,
+    } = cfg;
     const config = getNodeConfig(cfg);
 
     const keyShape = group.addShape("rect", {
@@ -62,19 +64,6 @@ const options = {
         y: 0,
         width: config.outerWidth,
         height: config.outerHeight,
-        // stroke: config.borderColor,
-        fill: config.backgoundColor,
-      },
-      draggable: true,
-      name: "node-contanier",
-    });
-
-    group.addShape("rect", {
-      attrs: {
-        x: (config.outerWidth - config.innerWidth) / 2,
-        y: (config.outerHeight - config.innerHeight) / 2,
-        width: config.innerWidth,
-        height: config.innerHeight,
         fill: config.backgoundColor,
         stroke: config.borderColor,
         radius: config.radius,
@@ -135,10 +124,10 @@ const options = {
     }
 
     /* 左边的小圆点 */
-    if (showLeftEndPoint) {
+    if (showAnchor || showLeftEndPoint) {
       group.addShape("circle", {
         attrs: {
-          x: (config.outerWidth - config.innerWidth) / 2,
+          x: 0,
           y: config.outerHeight / 2,
           r: 6,
           stroke: config.borderColor,
@@ -149,10 +138,10 @@ const options = {
         isAnchorPoint: true,
       });
     }
-    if (showRightEndPoint) {
+    if (showAnchor || showRightEndPoint) {
       group.addShape("circle", {
         attrs: {
-          x: (config.outerWidth + config.innerWidth) / 2,
+          x: config.outerWidth,
           y: config.outerHeight / 2,
           r: 6,
           stroke: config.borderColor,
@@ -182,10 +171,21 @@ const options = {
   },
   // afterDraw: nodeBasicMethod.afterDraw,
   // setState: nodeBasicMethod.setState,
+  /**
+   * 获取锚点（相关边的连入点）
+   * @param  {Object} cfg 节点的配置项
+   * @return {Array|null} 锚点（相关边的连入点）的数组,如果为 null，则没有控制点
+   */
+  getAnchorPoints(cfg: any) {
+    return [
+      [0, 0.5],
+      [1, 0.5],
+    ];
+  },
 };
 export default {
   type: "node",
-  name: "app",
+  name: "service",
   options,
   extendShapeType: "single-node",
 };
