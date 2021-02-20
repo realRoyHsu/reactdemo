@@ -18,6 +18,48 @@ const options: Partial<any> = {
       },
     },
   },
+  draw(cfg: any, group: any) {
+    console.log(cfg, group);
+    const startPoint = cfg.startPoint;
+    const endPoint = cfg.endPoint;
+    const shape = group.addShape("path", {
+      attrs: {
+        stroke: cfg.color,
+        path: [
+          ["M", startPoint.x, startPoint.y],
+          ["L", endPoint.x / 3 + (2 / 3) * startPoint.x, startPoint.y], // 三分之一处
+          ["L", endPoint.x / 3 + (2 / 3) * startPoint.x, endPoint.y], // 三分之二处
+          ["L", endPoint.x, endPoint.y],
+        ],
+        // lineWidth: 3,
+        // startArrow: {
+        //   // 自定义箭头指向(0, 0)，尾部朝向 x 轴正方向的 path
+        //   path: "M -10 4 L 0 0 L -10 -4 A 12 12 0 0 1 -10 4 Z",
+        //   // 箭头的偏移量，负值代表向 x 轴正方向移动
+        //   // d: -10,
+        //   // v3.4.1 后支持各样式属性
+        //   fill: "#333",
+        //   stroke: "#666",
+        //   opacity: 0.8,
+        //   // ...
+        // },
+        endArrow: {
+          // 自定义箭头指向(0, 0)，尾部朝向 x 轴正方向的 path
+          path: "M -10 4 L 0 0 L -10 -4 A 12 12 0 0 1 -10 4 Z",
+          // 箭头的偏移量，负值代表向 x 轴正方向移动
+          // d: -10,
+          // v3.4.1 后支持各样式属性
+          fill: "rgb(163, 177, 191)",
+          stroke: "rgb(163, 177, 191)",
+          // opacity: 0.8,
+          // ...
+        },
+      },
+      // must be assigned in G6 3.3 and later versions. it can be any value you want
+      name: "path-shape",
+    });
+    return shape;
+  },
 
   /**
    * 绘制边
@@ -152,7 +194,7 @@ const options: Partial<any> = {
 
 export default {
   type: "edge",
-  name: "polyline",
+  name: "polyline-round",
   options,
   extendShapeType: undefined,
 };

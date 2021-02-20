@@ -60,7 +60,6 @@ const App: React.FC<Props> = () => {
         // plugins: [minimap, grid], // 将 minimap 实例配置到图上
         width,
         height,
-        animate: true,
         // translate the graph to align the canvas's center, support by v3.5.1
         fitCenter: true,
         renderer: "svg",
@@ -69,7 +68,7 @@ const App: React.FC<Props> = () => {
         modes: {
           default: [
             "drag-canvas",
-            "drag-combo",
+            // "drag-combo",
             "drag-node",
             // "move-node",
             // {

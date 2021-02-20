@@ -196,7 +196,7 @@ function initWrapperData(
       targetAnchor: number;
       color: string;
       id: any;
-      shape: string;
+      type: string;
       lineAppendWidth: number;
       index: number;
     }[] = [];
@@ -374,7 +374,7 @@ function initWrapperData(
           targetAnchor,
           color: "#AAB7C4",
           id: editor.guid(),
-          shape: "polyline-round",
+          type: "polyline-round",
           lineAppendWidth: 5,
           index: 14,
         };

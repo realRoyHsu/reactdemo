@@ -5,6 +5,7 @@ import { styleConfig, imgStyleConfig } from "./../configs/index";
 
 const defaultWidth = 284;
 const defaultHeight = 150;
+const padding = 10;
 
 const options = {
   /**
@@ -17,33 +18,24 @@ const options = {
   draw: function (cfg: ModelConfig, group: GGroup): any {
     // Get the shape style, where the style.r corresponds to the R in the Illustration of Built-in Rect Combo
     const config = styleConfig;
-
-    const getBBox = group.getBBox();
-
-    console.log(cfg, getBBox);
     // 容器自适应
     const width = cfg?.style?.width || 0;
     const height = cfg?.style?.height || 0;
-    const padding = 8;
     // Add a circle shape as keyShape which is the same as the extended 'circle' type Combo
     const keyShape = group.addShape("rect", {
       attrs: {
-        // x: -(cfg?.style?.width || 0),
-        // y: -(cfg?.style?.height || 0),
-        x: -defaultWidth + width / 2 + padding,
-        y: -defaultHeight + height / 2 + padding,
-        width: defaultWidth,
-        height: defaultHeight,
-        fill: config.backgoundColor,
-        stroke: config.borderColor,
+        x: -width / 2,
+        y: -height / 2,
+        width,
+        height,
+        fill: "transparent",
+        stroke: "transparent",
         lineWidth: config.lineWidth,
-        radius: styleConfig.radius,
+        radius: config.radius,
       },
-      draggable: true,
+      draggable: false,
       name: "combo-keyShape",
     });
-    console.log(Math.max(cfg?.style?.width || 0, defaultWidth));
-
     return keyShape;
   },
   /**
@@ -51,26 +43,24 @@ const options = {
    * @param  {Object} cfg 配置项
    * @param  {G.Group} group 容器
    */
-  afterDraw: (cfg: any, group: any): any => {
-    const rect = group.find((ele: any) => ele.get("name") === "combo-keyShape");
-    const getBBox = rect.getBBox();
-    console.log(cfg, group, getBBox);
-  },
+  afterDraw: (cfg: any, group: any): any => {},
 
   /**
    *
    * @param cfg 配置项
    * @param item 实例
    */
-  update(cfg: any, item: any): any {
-    const model = item.getModel();
-    const getItemBBox = item.getBBox();
+  update(cfg: any, item: Item): void {
+    const width = cfg?.style?.width || 0;
+    const height = cfg?.style?.height || 0;
     const group = item.getContainer();
     const rect = group.find((ele: any) => ele.get("name") === "combo-keyShape");
-    const groupBox = group.getBBox();
-    const getBBox = rect.getBBox();
-    console.log(cfg, groupBox, getItemBBox, getBBox, model.data);
-    // rect.attr({
+    rect.attr({
+      x: -width / 2,
+      y: -height / 2,
+      width: width,
+      height: height,
+    });
   },
   /**
    * 更新节点后的操作，新增的图形需要在这里控制其更新逻辑
@@ -78,11 +68,7 @@ const options = {
    * @param  {Object} cfg 配置项
    * @param  {Combo} item 实例
    */
-  afterUpdate: (cfg: any, item: any): any => {
-    // const rect = item.find((ele: any) => ele.get("name") === "combo-keyShape");
-    // const getBBox = rect.getBBox();
-    // console.log(cfg, item, getBBox);
-  },
+  afterUpdate: (cfg: any, item: any): any => {},
   /**
    * 是否允许更新。
    * @param type 元素类型，'node' 或 'edge'

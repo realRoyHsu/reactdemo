@@ -5,6 +5,7 @@ import { styleConfig, imgStyleConfig } from "./../configs/index";
 let graph: any;
 const ERROR_COLOR = "#F5222D";
 const getNodeConfig = (cfg: any): any => {
+  const padding = 10;
   const outerWidth = 90;
   let outerHeight = 50;
   let imgWidth = 0;
@@ -19,35 +20,14 @@ const getNodeConfig = (cfg: any): any => {
     outerHeight,
     imgWidth,
     imgHeight,
+    padding,
   };
   return config;
-};
-
-const COLLAPSE_ICON = function COLLAPSE_ICON(x: any, y: any, r: any): any {
-  return [
-    ["M", x - r, y],
-    ["a", r, r, 0, 1, 0, r * 2, 0],
-    ["a", r, r, 0, 1, 0, -r * 2, 0],
-    ["M", x - r + 4, y],
-    ["L", x - r + 2 * r - 4, y],
-  ];
-};
-const EXPAND_ICON = function EXPAND_ICON(x: any, y: any, r: any): any {
-  return [
-    ["M", x - r, y],
-    ["a", r, r, 0, 1, 0, r * 2, 0],
-    ["a", r, r, 0, 1, 0, -r * 2, 0],
-    ["M", x - r + 4, y],
-    ["L", x - r + 2 * r - 4, y],
-    ["M", x - r + r, y - r + 4],
-    ["L", x, y + r - 4],
-  ];
 };
 
 // 绘制node
 const options = {
   draw: (cfg: any, group: any): any => {
-    console.log(cfg, group);
     const {
       showAnchor,
       showLeftEndPoint,
@@ -64,6 +44,22 @@ const options = {
         y: 0,
         width: config.outerWidth,
         height: config.outerHeight,
+        fill: "transparent",
+        stroke: "transparent",
+        radius: config.radius,
+        lineWidth: config.lineWidth,
+        cursor: "pointer",
+      },
+      name: "node-shape",
+      draggable: true,
+    });
+
+    group.addShape("rect", {
+      attrs: {
+        x: config.padding / 2,
+        y: config.padding / 2,
+        width: config.outerWidth - config.padding,
+        height: config.outerHeight - config.padding,
         fill: config.backgoundColor,
         stroke: config.borderColor,
         radius: config.radius,
@@ -127,7 +123,7 @@ const options = {
     if (showAnchor || showLeftEndPoint) {
       group.addShape("circle", {
         attrs: {
-          x: 0,
+          x: config.padding / 2,
           y: config.outerHeight / 2,
           r: 6,
           stroke: config.borderColor,
@@ -141,7 +137,7 @@ const options = {
     if (showAnchor || showRightEndPoint) {
       group.addShape("circle", {
         attrs: {
-          x: config.outerWidth,
+          x: config.outerWidth - config.padding / 2,
           y: config.outerHeight / 2,
           r: 6,
           stroke: config.borderColor,
@@ -152,7 +148,7 @@ const options = {
         isAnchorPoint: true,
       });
     }
-    // 原点 0 0
+    // // 原点 0 0
     // group.addShape("circle", {
     //   attrs: {
     //     x: 0,
