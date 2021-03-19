@@ -8,6 +8,8 @@ const DraggableTask = lazy(() => import("../views/draggable/task"));
 const DraggableJsplumb = lazy(() => import("../views/draggable/jsplumb"));
 const G6 = lazy(() => import("../views/g6/index"));
 const G6Demo = lazy(() => import("../views/g6/demo/index"));
+const D3 = lazy(() => import("../views/d3/index"));
+const D3Btc = lazy(() => import("../views/d3/btc/index"));
 const GraphCustom = lazy(() => import("../views/g6/GraphCustom/index"));
 const VirtualListDemo = lazy(() => import("../views/VirtualListDemo/index"));
 
@@ -51,6 +53,18 @@ export const routes: RouteConfig[] = [
         path: "/g6/graphCustom",
         component: GraphCustom,
         meta: { title: "GraphCustom", icon: "", affix: true },
+      },
+    ],
+  },
+  {
+    path: "/d3",
+    component: D3,
+    meta: { title: "G3", icon: "", affix: true },
+    routes: [
+      {
+        path: "/d3/D3Btc",
+        component: D3Btc,
+        meta: { title: "D3Btc", icon: "", affix: true },
       },
     ],
   },

@@ -7,11 +7,16 @@ import Router from "./route/index";
 import { store, persistor } from "./redux/index";
 import moment from "moment";
 import "moment/locale/zh-cn";
-
+import { getBtcPrice } from "@/api/btc.ts";
 moment.locale("en");
 
 interface IProps {}
 const App: React.FC<IProps> = () => {
+  setInterval(async () => {
+    const res = await getBtcPrice();
+    console.log(res);
+    document.title = `BTC=>${res.BTC}`;
+  }, 5000);
   console.info(
     "%c%s",
     "color: rgb(120, 187, 120); font-size: 24px;",
